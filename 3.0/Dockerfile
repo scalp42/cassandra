@@ -18,14 +18,11 @@ RUN set -x \
   && gosu nobody true \
   && apt-get purge -y --auto-remove ca-certificates wget
 
-RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 514A2AD631A57A16DD0047EC749D6EEC0353B12C 350200F2B999A372
+RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 514A2AD631A57A16DD0047EC749D6EEC0353B12C
 
-RUN apt-get update \
-  && apt-get install -y apt-transport-https
+RUN echo 'deb http://www.apache.org/dist/cassandra/debian 30x main' >> /etc/apt/sources.list.d/cassandra.list
 
-RUN echo 'deb https://debian.datastax.com/community/ stable main' >> /etc/apt/sources.list.d/cassandra.list
-
-ENV CASSANDRA_VERSION 3.0.3
+ENV CASSANDRA_VERSION 3.0.4
 
 RUN apt-get update \
   && apt-get install -y cassandra="$CASSANDRA_VERSION" \
