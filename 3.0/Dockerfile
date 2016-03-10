@@ -18,7 +18,7 @@ RUN set -x \
   && gosu nobody true \
   && apt-get purge -y --auto-remove ca-certificates wget
 
-RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 514A2AD631A57A16DD0047EC749D6EEC0353B12C
+RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 514A2AD631A57A16DD0047EC749D6EEC0353B12C 350200F2B999A372
 
 RUN apt-get update \
   && apt-get install -y apt-transport-https
@@ -28,7 +28,7 @@ RUN echo 'deb https://debian.datastax.com/community/ stable main' >> /etc/apt/so
 ENV CASSANDRA_VERSION 3.0.3
 
 RUN apt-get update \
-  && apt-get install -y --force-yes cassandra="$CASSANDRA_VERSION" \
+  && apt-get install -y cassandra="$CASSANDRA_VERSION" \
   && rm -rf /var/lib/apt/lists/*
 
 ENV CASSANDRA_CONFIG /etc/cassandra
