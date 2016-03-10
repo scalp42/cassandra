@@ -28,7 +28,7 @@ RUN echo 'deb https://debian.datastax.com/community/ stable main' >> /etc/apt/so
 ENV CASSANDRA_VERSION 3.0.3
 
 RUN apt-get update \
-  && apt-get install -y cassandra="$CASSANDRA_VERSION" \
+  && apt-get install -y --force-yes cassandra="$CASSANDRA_VERSION" \
   && rm -rf /var/lib/apt/lists/*
 
 ENV CASSANDRA_CONFIG /etc/cassandra
